@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:music_app/common/helper/overlay_loading_progress.dart';
 import 'package:music_app/data/models/auth/create_user_req.dart';
 import 'package:music_app/data/models/auth/signin_user_req.dart';
 
@@ -17,7 +15,10 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
   @override
   Future<Either> signin(SignInUserReq signInUserReq) async{
     try{
-      await FirebaseAuth.instance.signInWithEmailAndPassword(email: signInUserReq.email, password: signInUserReq.password);
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: signInUserReq.email,
+          password: signInUserReq.password);
+
       return const Right("Sign In Successful");
     }on FirebaseAuthException catch (e){
       String message = '';
@@ -43,8 +44,15 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
   @override
   Future<Either> signup(CreateUserReq createUserReq) async {
     try{
-      await FirebaseAuth.instance
+      var data = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: createUserReq.userName, password: createUserReq.password);
+
+      FirebaseFirestore.instance.collection('Users').add(
+          {
+            'name' : createUserReq.fullName,
+            'email' : data.user?.email,
+          }
+      );
       return const Right("Sign Up Successful");
     }on FirebaseAuthException catch(e){
       String message = '';

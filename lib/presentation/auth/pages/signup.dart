@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -44,9 +42,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignInScreen()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const SignInScreen()));
               },
-              child: Text("Sign in",style: TextStyle(fontSize: 14,color: Colors.blue),),)
+              child: const Text("Sign in",style: TextStyle(fontSize: 14,color: Colors.blue),),)
           ],
         ),
       ),
@@ -100,11 +98,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       result.fold(
                               (l) {
                                 print(l);
-                                var message = SnackBar(content: Text(l,style: TextStyle(color: Colors.black),));
+                                var message = SnackBar(content: Text(l,style: const TextStyle(color: Colors.black),));
                                 ScaffoldMessenger.of(context).showSnackBar(message);
                               },
                               (r) {
-                                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>SignInScreen()), (route)=>false);
+                                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const SignInScreen()), (route)=>false);
                               }
                       );
                     },

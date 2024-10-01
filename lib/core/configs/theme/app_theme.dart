@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:music_app/common/helper/is_dark_mode.dart';
 import 'package:music_app/core/configs/theme/app_color.dart';
 
 class AppTheme{
