@@ -6,6 +6,7 @@ import 'package:music_app/domain/entities/song/song.dart';
 
 abstract class SongFirebaseService {
   Future <Either> getNewsSong();
+  Future <Either> getPlayList();
 }
 
 class SongFirebaseServiceImpl extends SongFirebaseService{
@@ -13,22 +14,45 @@ class SongFirebaseServiceImpl extends SongFirebaseService{
   Future<Either> getNewsSong() async{
     try{
       List<SongEntity> songs=[];
-      var data = await FirebaseFirestore.instance.collection("Songs").orderBy("releaseDate",descending: true).get();
+      var data = await FirebaseFirestore.instance.collection("Songs").orderBy("releaseDate",descending: true).limit(4).get();
       if (kDebugMode) {
-        print("loading data");
-        print(data);
+        print("loading data successful");
       }
       for(var element in data.docs){
-        print("fetch");
         var songModel = SongModel.fromJson(element.data());
         songs.add(songModel.toEntity());
-        print(songs.length);
+        if (kDebugMode) {
+          print("fetch data successful");
+        }
       }
       return Right(songs);
     }catch(e){
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
       return left(e);
     }
+  }
+
+  @override
+  Future<Either> getPlayList() async{
+   try{
+     List<SongEntity> songs=[];
+     var data = await FirebaseFirestore.instance.collection("Songs").orderBy("releaseDate",descending: true).get();
+     if (kDebugMode) {
+       print("loading data");
+       print(data);
+     }
+     for(var element in data.docs){
+       print("fetch");
+       var songModel = SongModel.fromJson(element.data());
+       songs.add(songModel.toEntity());
+       print(songs.length);
+     }
+     return Right(songs);
+   } catch(e){
+     return left(e);
+   }
   }
 
 }

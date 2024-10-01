@@ -36,6 +36,7 @@ class _NewsSongsState extends State<NewsSongs> {
 
   Widget _songs(List<SongEntity> songs){
     return ListView.separated(
+      padding: EdgeInsets.zero,
       scrollDirection: Axis.horizontal,
         shrinkWrap: true,
         itemBuilder: (context, index){

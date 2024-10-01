@@ -5,6 +5,7 @@ import 'package:music_app/common/widget/appbar/basic_appbar.dart';
 import 'package:music_app/core/configs/assets/app_images.dart';
 import 'package:music_app/core/configs/assets/app_vectors.dart';
 import 'package:music_app/presentation/home/widgets/news_song.dart';
+import 'package:music_app/presentation/home/widgets/playlist.dart';
 
 import '../../../core/configs/theme/app_color.dart';
 
@@ -33,25 +34,38 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
         hideBack: true,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _homeTopCard(),
-            _tabs(),
-            SizedBox(
-              height: 260,
-              child: TabBarView(
-                controller: _tabController,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _homeTopCard(),
+              _tabs(),
+              SizedBox(
+                height: 260,
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    const Padding(padding: EdgeInsets.only(left: 16),
+                    child: NewsSongs()),
+                    Container(child: const Text("1"),),
+                    Container(child: const Text("2"),),
+                    Container(child: const Text("3"),),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Padding(padding: EdgeInsets.only(left: 16),
-                  child: NewsSongs()),
-                  Container(child: const Text("1"),),
-                  Container(child: const Text("2"),),
-                  Container(child: const Text("3"),),
+                  Text("Playlists",style: TextStyle(fontWeight: FontWeight.bold,color: context.isDarkMode ? Colors.white :Colors.black,fontSize: 20),),
+                  const Text("See more",style: TextStyle(color: AppColors.grey,fontSize: 12),)
                 ],
               ),
-            ),
-          ],
+              const SizedBox(height: 20,),
+              const PlayLists()
+            ],
+          ),
         ),
       ),
     );
@@ -85,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
       dividerHeight: 0,
       padding: const EdgeInsets.symmetric(
           vertical: 20,
-          horizontal: 16
+          // horizontal: 16
       ),
       tabs: const [
         Text(

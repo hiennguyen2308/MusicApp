@@ -6,6 +6,7 @@ import 'package:music_app/domain/repository/song/song.dart';
 import 'package:music_app/domain/usecase/auth/signin.dart';
 import 'package:music_app/domain/usecase/auth/signup.dart';
 import 'package:music_app/domain/usecase/song/get_news_song.dart';
+import 'package:music_app/domain/usecase/song/get_play_list.dart';
 
 import 'data/source/song/song_firebase_service.dart';
 import 'domain/repository/auth/auth.dart';
@@ -39,5 +40,8 @@ Future<void> initializeDependecies () async {
 
   sl.registerSingleton<GetNewsSongUseCase>(
       GetNewsSongUseCase()
+  );
+  sl.registerSingleton<GetPlayListUseCase>(
+      GetPlayListUseCase()
   );
 }
