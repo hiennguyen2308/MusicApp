@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.only(left: 16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -46,8 +46,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    const Padding(padding: EdgeInsets.only(left: 16),
-                    child: NewsSongs()),
+                    const NewsSongs(),
                     Container(child: const Text("1"),),
                     Container(child: const Text("2"),),
                     Container(child: const Text("3"),),
@@ -55,15 +54,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
                 ),
               ),
               const SizedBox(height: 20,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Playlists",style: TextStyle(fontWeight: FontWeight.bold,color: context.isDarkMode ? Colors.white :Colors.black,fontSize: 20),),
-                  const Text("See more",style: TextStyle(color: AppColors.grey,fontSize: 12),)
-                ],
-              ),
-              const SizedBox(height: 20,),
-              const PlayLists()
+              Padding(
+                padding: EdgeInsets.only(right: 16),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Playlists",style: TextStyle(fontWeight: FontWeight.bold,color: context.isDarkMode ? Colors.white :Colors.black,fontSize: 20),),
+                        const Text("See more",style: TextStyle(color: AppColors.grey,fontSize: 12),)
+                      ],
+                    ),
+                    const SizedBox(height: 20,),
+                    const PlayLists()
+                  ],
+                ),
+              )
             ],
           ),
         ),

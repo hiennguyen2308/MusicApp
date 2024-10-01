@@ -21,9 +21,9 @@ class SongFirebaseServiceImpl extends SongFirebaseService{
       for(var element in data.docs){
         var songModel = SongModel.fromJson(element.data());
         songs.add(songModel.toEntity());
-        if (kDebugMode) {
-          print("fetch data successful");
-        }
+      }
+      if (kDebugMode) {
+        print("fetch data successful");
       }
       return Right(songs);
     }catch(e){
@@ -44,10 +44,11 @@ class SongFirebaseServiceImpl extends SongFirebaseService{
        print(data);
      }
      for(var element in data.docs){
-       print("fetch");
        var songModel = SongModel.fromJson(element.data());
        songs.add(songModel.toEntity());
-       print(songs.length);
+     }
+     if (kDebugMode) {
+       print("fetch data successful");
      }
      return Right(songs);
    } catch(e){

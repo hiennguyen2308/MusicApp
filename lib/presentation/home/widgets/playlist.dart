@@ -7,6 +7,7 @@ import 'package:music_app/presentation/home/bloc/play_list/play_list_state.dart'
 
 import '../../../core/configs/theme/app_color.dart';
 import '../../../domain/entities/song/song.dart';
+import '../../song_player/pages/song_player.dart';
 
 class PlayLists extends StatefulWidget {
   const PlayLists({super.key});
@@ -40,15 +41,15 @@ class _PlayListsState extends State<PlayLists> {
         itemBuilder: (context,index) {
           return GestureDetector(
             onTap: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (BuildContext context)
-              //         => SongPlayerPage(
-              //           songEntity: songs[index],
-              //         )
-              //     )
-              // );
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context)
+                      => SongPlayerScreen(
+                        songEntity: songs[index],
+                      )
+                  )
+              );
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
